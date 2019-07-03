@@ -1,7 +1,7 @@
 
 <template>
   <div class="homepage-hero-module" >
-    <loginWidget></loginWidget>
+    <queryWidget></queryWidget>
     <div class="video-container">
       <div :style="fixStyle" class="filter"></div>
       <video :style="fixStyle" autoplay loop class="fillWidth" v-on:canplay="canplay">
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import loginWidget from './loginWidget'
+  import QueryWidget from './QueryWidget'
   export default {
     name: 'login',
     data() {
@@ -25,7 +25,7 @@
         fixStyle: ''
       }
     },
-    components: { loginWidget },
+    components: { QueryWidget },
     methods: {
       canplay() {
         this.vedioCanPlay = true
@@ -70,6 +70,12 @@
     height: 100%;
     width: 0px;
     overflow: hidden;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 0px;
   }
   .video-container {
     height: 100%;
@@ -79,18 +85,18 @@
   .video-container .poster img,
   .video-container video {
 
-    z-index: 1;
+    z-index: 0;
     position: fixed;
     right: 0px;
 
   }
   .video-container .filter {
     width: 2000px;
-    opacity: 0.6;
-    background-color: black;
+    opacity: 0.3;
+    background-color: midnightblue;
     height: 1000px;
     left: 0;
     position: fixed;
-    z-index: 2;
+    z-index: 1;
   }
 </style>

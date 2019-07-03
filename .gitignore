@@ -5,6 +5,9 @@
 *.mp4
 *.jpg
 
+node_modules/
+.idea/
+
 # Log file
 *.log
 

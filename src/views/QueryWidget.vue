@@ -1,39 +1,34 @@
 <template>
   <div id="login-container" v-loading="loading">
     <div class="hold-space-div"></div>
-    <gd id="title">汽车维修查询平台</gd>
+    <span id="title">汽车维修查询平台</span>
     <div style="margin: 10px;"></div>
-    <el-form id="login-form" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="top" >
+    <el-form id="login-form" :model="QueryForm" :rules="QueryRules" ref="QueryForm" label-position="top" >
       <el-form-item  prop="vin">
-        <el-input name="vin" type="text" v-model.number="loginForm.vin" placeholder="车架号"
+        <el-input name="vin" type="text" v-model="QueryForm.vin" placeholder="车架号"
                   @keyup.enter.native="handleQuery">
         </el-input>
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" style="width:40%;" :loading="loading" @click.native.prevent="handleQuery">
-          登录
+        <el-button plain type="primary" style="width:40%;" :loading="loading" @click.native.prevent="handleQuery('QueryForm')" icon="el-icon-search">
+          查询
         </el-button>
       </el-form-item>
 
     </el-form>
     <div class="hold-space-div"></div>
-    <div v-if="elegantSentences" id="elegant-sentences">
-      <div id="elegant-sentences-content">
-        {{elegantSentences.content}}
-      </div>
-      <div id="elegant-sentences-inscribe">
-        —— {{elegantSentences.name}}
-      </div>
-    </div>
+
+
+
   </div>
 </template>
 
 
 <script>
-
+  import GLOBAL from  '@/store/global_variable.js'
   export default {
-    name: 'loginWidget',
+    name: 'queryWidget',
     data() {
       const validateUsername = (rule, value, callback) => {
         if (!isvalidUsernameOrPassword(value)) {
@@ -43,36 +38,52 @@
         }
       }
       return {
-        elegantSentences: null,
-        commDelay: '待获取',
-        dataBeforeTime: 0,
-        IsNormal: '待获取',
-        loginForm: {
-          vin: '',
-          password: ''
+        QueryForm: {
+          vin: ''
         },
-        loginRules: {
+        QueryRules: {
           vin: [
             { required: true, trigger: 'blur',message: '车架号不能为空' },
-            { type: 'number', message: '车价号必须为数字'}]
+            { type: 'string', message: '车价号必须为数字和字母的组合'},
+            { min: 17, max: 17, message: '车架号长度为17位', trigger: 'blur' }
+            ]
         },
         loading: false,
         pwdType: 'password'
+
       }
     },
     computed: {
 
     },
     methods: {
-      showPwd() {
-        if (this.pwdType === 'password') {
-          this.pwdType = ''
-        } else {
-          this.pwdType = 'password'
+      handleQuery(formName){
+        let status = false;
+        var _this = this
+        var params = {
+          address:GLOBAL.contract_address,
+          VIN:this.QueryForm.vin
         }
-      },
-      handleQuery() {
-        this.$router.push({path: '/QueryResult', query: {VIN: this.loginForm.vin}})
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            _this.axios.get('/getExistence/',{params})
+              .then(function (response) {
+                console.log("print computed", response.data.existence);
+                status = response.data.existence;
+                if(status) {
+                  _this.$router.push({path: '/QueryResult', query: {VIN: _this.QueryForm.vin}})
+                }
+                else
+                {
+                  _this.$notify({
+                    title: '查询',
+                    message:  '您输入的VIN不存在',
+                    duration: 2500
+                  });
+                }
+              })
+          }
+        })
       }
     }
 
@@ -87,7 +98,7 @@
     height: 100%;
     width: 100%;
     position: absolute;
-    z-index: 100;
+    z-index: 2;
     color: #fff;
   }
   #title {
@@ -100,7 +111,7 @@
     max-width: 350px;
     min-width: 250px;
     margin: 0 auto;
-    width: 25%;
+    width: 35%;
   }
 
   i {
@@ -108,9 +119,6 @@
   }
   .hold-space-div {
     flex: 1
-  }
-   gd{
-    font-size: 100px;
   }
   #elegant-sentences {
     padding-top: 25px;
