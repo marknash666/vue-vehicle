@@ -38,7 +38,7 @@
         let _this =this
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            GLOBAL.userKey = this.LoginInfo.userKey;
+            GLOBAL.setuserKey(_this.LoginInfo.userKey);
             const h = this.$createElement;
             this.$notify({
               title: '登录',
@@ -46,7 +46,7 @@
               duration: 1500
             });
             let data = {
-              userKey: GLOBAL.userKey
+              userKey: GLOBAL.getuserKey()
             }
             _this.axios.post('changeUser/',data)
               .then(function (response) {

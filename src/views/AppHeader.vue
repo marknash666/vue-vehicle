@@ -151,7 +151,7 @@
     methods:{
       handleUpdate(){
         console.log("sadasd",GLOBAL.userKey)
-        if(GLOBAL.userKey=='')
+        if(GLOBAL.getuserKey()==undefined)
         {
           alert("在执行汽车维修保养信息更新之前，需要先进行登录以验证身份")
         }else{
@@ -160,7 +160,7 @@
       },
       handleAddApprove(){
         console.log("sadasd",GLOBAL.userKey)
-        if(GLOBAL.userKey=='')
+        if(GLOBAL.getuserKey()==undefined)
         {
           alert("在执行汽车维修保养信息更新之前，需要先进行登录以验证身份")
         }else{

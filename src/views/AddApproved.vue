@@ -118,6 +118,12 @@
 
 
           }
+          else{
+            this.$notify.error({
+              title: '错误',
+              message: '维修店地址格式有误'
+            });
+          }
         })
       }
     }
@@ -125,5 +131,8 @@
 </script>
 
 <style scoped>
-
+  .login-form-input  >>> .el-input__inner{
+    box-shadow:1px 1px 3px 1px darkgray;
+    border:1px solid #CCC;
+  }
 </style>
