@@ -34,7 +34,7 @@ Vue.component('modal', {
   }
 })
 
-new Vue({
+const vue = new Vue({
   el: '#app',
   router,
   axios,
@@ -45,3 +45,9 @@ new Vue({
     showModal: false
   }
 }).$mount("#app")
+
+window.addEventListener('load', function () {
+  if (vue.$route.path === '/AddApproved') { // /date 表示日期选择路由
+    vue.$router.replace('/') // 列表页面的路由
+  }
+})

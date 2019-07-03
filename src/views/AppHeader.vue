@@ -33,10 +33,9 @@
                   <p class="description d-none d-md-inline-block mb-0">已认证的维修点可以进行汽车维修保养记录的更新</p>
                 </div>
               </a>
-              <router-link  to="/AddApproved">
-              <a href="https://demos.creative-tim.com/vue-argon-design-system/documentation/"
-                 class="media d-flex align-items-center">
 
+              <a href="#" @click="handleAddApprove"
+                 class="media d-flex align-items-center">
                 <div class="icon icon-shape bg-gradient-warning rounded-circle text-white">
                   <i class="ni ni-ui-04"></i>
                 </div>
@@ -45,7 +44,6 @@
                   <p class="description d-none d-md-inline-block mb-0">合约持有人可以进行维修点的授权</p>
                 </div>
               </a>
-                </router-link>
 
             </div>
           </base-dropdown>
@@ -158,6 +156,15 @@
           alert("在执行汽车维修保养信息更新之前，需要先进行登录以验证身份")
         }else{
           this.modals.modal3=true
+        }
+      },
+      handleAddApprove(){
+        console.log("sadasd",GLOBAL.userKey)
+        if(GLOBAL.userKey=='')
+        {
+          alert("在执行汽车维修保养信息更新之前，需要先进行登录以验证身份")
+        }else{
+          this.$router.push({path: '/AddApproved'})
         }
       }
 

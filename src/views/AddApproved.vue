@@ -41,17 +41,18 @@
             <card gradient="secondary" shadow body-classes="p-lg-5">
               <h4 class="mb-1">维修点添加</h4>
               <p class="mt-0">在添加时要仔细核对地址的正确性</p>
-              <base-input class="mt-5"
-                          alternative
-                          placeholder="Your name"
-                          addon-left-icon="ni ni-user-run">
-              </base-input>
-              <base-input alternative
-                          placeholder="Email address"
-                          addon-left-icon="ni ni-email-83">
-              </base-input>
+              <el-form :model="ApprovedInfo" :rules="rules" ref="ApprovedInfo" class="demo-ruleForm" style="width: 100%;">
+                <el-form-item  prop="address" >
+                  <el-input class="login-form-input"
+                            prefix-icon="fa fa-cloud-upload mr-2"
+                            placeholder="维修点地址"
+                            v-model="ApprovedInfo.address">
+                  </el-input>
+                </el-form-item>
+              </el-form>
 
-              <base-button type="default" round block size="lg">
+
+              <base-button type="default" round block size="lg" @click="handleAddApprove('ApprovedInfo')">
                 Send Message
               </base-button>
             </card>
@@ -74,8 +75,52 @@
 </template>
 
 <script>
+  import GLOBAL from  '@/store/global_variable.js'
   export default {
-    name: "AddApproved"
+    name: "AddApproved",
+    data() {
+      return {
+        ApprovedInfo: {
+          address: ''
+        },
+        rules: {
+          address: [
+            { required: true, trigger: 'blur',message: '维修点地址不能为空' },
+            { type: 'string', message: '维修点地址必须为数字和字母的组合'},
+            { min: 42, max: 42, message: '地址长度为42个字节', trigger: 'blur' }
+          ]
+        }
+      };
+    },
+    methods:{
+      handleAddApprove(formName)
+      {
+        let _this =this
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            let data = {
+              address: GLOBAL.contract_address,
+              approved:_this.ApprovedInfo.address
+            }
+            _this.axios.post('addApprovedMaintenanceShop/',data)
+              .then(function (response) {
+                let status = response.data.status;
+                console.log(status)
+                if (status) {
+                  _this.$message({
+                    message: '汽车维修点地址成功添加',
+                    type: 'success'
+                  });
+                }else{
+                  _this.$message.error('汽车维修点地址添加失败');
+                }
+              })
+
+
+          }
+        })
+      }
+    }
   }
 </script>
 
