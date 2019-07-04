@@ -132,7 +132,7 @@
               {
                 console.log(error);
               });
-            resetForm(formName)
+            _this.resetForm(formName)
           } else {
             this.$notify({
               title: '提交',
