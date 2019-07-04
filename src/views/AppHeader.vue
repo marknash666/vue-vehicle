@@ -23,7 +23,7 @@
             <span class="nav-link-inner--text">权限级操作</span>
           </a>
           <div class="dropdown-menu-inner">
-            <a href="#" class="media d-flex align-items-center" @click="handleInitial">
+            <a href="" class="media d-flex align-items-center" @click="handleInitial">
               <div class="icon icon-shape bg-gradient-success rounded-circle text-white">
                 <i class="ni ni-zoom-split-in"></i>
               </div>
