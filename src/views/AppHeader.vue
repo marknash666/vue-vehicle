@@ -107,17 +107,6 @@
               </div>
             </a>
 
-            <a href="" @click="handleAddApprove"
-               class="media d-flex align-items-center">
-              <div class="icon icon-shape bg-gradient-warning rounded-circle text-white">
-                <i class="ni ni-ui-04"></i>
-              </div>
-              <div class="media-body ml-3">
-                <h5 class="heading text-warning mb-md-1">认证维修点</h5>
-                <p class="description d-none d-md-inline-block mb-0">合约持有人可以进行维修点的授权</p>
-              </div>
-            </a>
-
           </div>
         </base-dropdown>
       </ul>
@@ -184,8 +173,8 @@
           modal3: false,
           modal2: false
 
-        },
-        local_userKey: undefined
+        }
+
 
       }
     },
@@ -210,6 +199,22 @@
         } else {
           this.$router.push({path: '/VehicleInitial'})
         }
+      },
+      handleDisplay(){
+        if (GLOBAL.getuserKey() == undefined) {
+          alert("需要先进行登录以验证身份以查看当前所拥有的车辆")
+        } else {
+          this.$router.push({path: '/Display'})
+        }
+
+      },
+      handleTransfer(){
+        if (GLOBAL.getuserKey() == undefined) {
+          alert("需要先进行登录以验证身份以查看当前所拥有的车辆")
+        } else {
+          this.$router.push({path: '/Transfer'})
+        }
+
       }
 
     }

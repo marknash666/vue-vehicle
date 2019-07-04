@@ -4,7 +4,7 @@
     <div class="position-relative">
       <!-- shape Hero -->
       <section class="section-shaped my-0">
-        <div class="shape shape-style-2 shape-default shape-skew">
+        <div class="shape shape-style-1 bg-gradient-success shape-skew">
           <span></span>
           <span></span>
           <span></span>
@@ -19,11 +19,8 @@
           <div class="col px-0">
             <div class="row">
               <div class="col-lg-6">
-                <h1 class="display-3  text-white">维修信息查询系统
-                  <span>{{"车架号："+ this.$route.query.VIN}}</span>
+                <h1 class="display-3  text-white">账号拥有的汽车
                 </h1>
-                <p class="lead  text-white" v-html="ManufactureInfo"></p>
-
               </div>
             </div>
           </div>
@@ -61,14 +58,6 @@
     </section>
 
 
-
-
-
-
-
-
-
-
   </div>
 </template>
 
@@ -92,7 +81,6 @@
         address:GLOBAL.contract_address,
         VIN:input_vin
       }
-      console.log("print 342234", input_vin);
       _this.axios.get('getVehicleTotalInfo/',{params})
         .then(function (response) {
           console.log("print computed", response);

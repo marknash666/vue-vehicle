@@ -4,7 +4,9 @@ import AddApproved from '@/views/AddApproved'
 import Query from '@/views/Query'
 import QueryResult from '@/views/QueryResult'
 import AppHeader from "@/views/AppHeader"
-import VehicleInitial from "@/views/VehicleInitial";
+import VehicleInitial from "@/views/VehicleInitial"
+import Display from "@/views/Display"
+import Transfer from "@/views/Transfer";
 Vue.use(Router)
 
 export default new Router({
@@ -36,6 +38,20 @@ export default new Router({
       components: {
         header:AppHeader,
         default: VehicleInitial
+      }
+    },
+    {
+      path: '/Display',
+      components: {
+        header:AppHeader,
+        default: Display
+      }
+    },
+    {
+      path: '/Transfer',
+      components: {
+        header:AppHeader,
+        default: Transfer
       }
     }
   ],
