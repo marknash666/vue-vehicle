@@ -111,7 +111,7 @@
                 通过私钥登录
               </div>
             </template>
-            <loginWidget></loginWidget>
+            <loginWidget v-bind:modals="modals"></loginWidget>
           </card>
         </modal>
         </li>
