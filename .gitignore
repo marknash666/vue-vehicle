@@ -2,8 +2,8 @@
 *.class
 
 # Video file
-*.mp4
-*.jpg
+#*.mp4
+#*.jpg
 
 node_modules/
 .idea/
