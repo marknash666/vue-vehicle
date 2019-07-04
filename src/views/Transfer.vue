@@ -73,11 +73,10 @@
                   </div>
 
                   <template slot="footer">
-                    <base-button type="white">Ok, Got it</base-button>
+                    <base-button type="white" @click="submitForm('TransferInfo')">Ok, Got it</base-button>
                     <base-button type="link"
                                  text-color="white"
-                                 class="ml-auto"
-                                 @click="submitForm('TransferInfo')">
+                                 class="ml-auto">
                       Close
                     </base-button>
                   </template>
@@ -97,9 +96,10 @@
 <script>
   import GLOBAL from '@/store/global_variable.js'
   import Modal from "@/components/Modal.vue";
+
   export default {
     name: "home",
-    components:{
+    components: {
       Modal
     },
     data() {
@@ -120,51 +120,48 @@
             {min: 17, max: 17, message: '车架号长度为17位', trigger: 'blur'}
           ]
         },
-        modals:{
-          modal2:false
+        modals: {
+          modal2: false
         }
       };
     },
     methods: {
       submitForm(formName) {
-        let _this=this
+        let _this = this
         let data = {
           address: GLOBAL.contract_address,
           toaddress: _this.TransferInfo.toaddress,
-          vin:  _this.TransferInfo.vin
+          vin: _this.TransferInfo.vin
         }
         this.$refs[formName].validate((valid) => {
           if (valid) {
             let status;
             this.$notify({
               title: '转让',
-              message:  '转让信息已提交',
+              message: '转让信息已提交',
               duration: 1500
             });
             console.log("response", data);
-            _this.axios.post('transfer/',data)
+            _this.axios.post('transfer/', data)
               .then(function (response) {
                 status = response.data.status;
-                if(status)
-                {
+                if (status) {
                   _this.$message({
-                    message:  '汽车已转让 车架号为：'+_this.TransferInfo.vin+ '接受者为'+_this.TransferInfo.toaddress,
+                    message: '汽车已转让 车架号为：' + _this.TransferInfo.vin + '接受者为' + _this.TransferInfo.toaddress,
                     type: 'success'
                   });
-                }
-                else{
+                } else {
                   _this.$message.error('汽车转让失败 车架号不存在或没有权限操作');
                 }
               })
-              .catch(function (error)
-              {
+              .catch(function (error) {
                 console.log(error);
               });
             _this.resetForm(formName)
           } else {
             this.$notify({
               title: '提交',
-              message:  '转让信息有误',
+              message: '转让信息有误',
               duration: 1500
             });
             return false;
@@ -172,13 +169,13 @@
         });
       },
       resetForm(formName) {
-        this.$nextTick(()=>{
+        this.$nextTick(() => {
           this.$refs[formName].resetFields();
 
         })
       }
     },
-    created:function(){
+    created: function () {
 
     }
   };

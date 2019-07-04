@@ -111,7 +111,7 @@
         </base-dropdown>
       </ul>
       <ul class="navbar-nav align-items-lg-center ml-lg-auto">
-        <li class="nav-item" >
+        <li class="nav-item">
           <h6 class="heading text-white mb-md-1">状态：{{userKey===undefined?"未登录":"已登录"}}</h6>
         <li class="nav-item d-none d-lg-block ml-lg-4">
           <a target="_blank" rel="noopener" class="btn btn-neutral btn-icon" @click="modals.modal2 = true">
