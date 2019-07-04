@@ -81,15 +81,44 @@
             <add-vehicle-info></add-vehicle-info>
           </card>
         </modal>
-        <base-dropdown tag="li" class="nav-item">
-          <a slot="title" href="" class="nav-link" data-toggle="dropdown" role="button">
-            <i class="ni ni-collection d-lg-none"></i>
-            <span class="nav-link-inner--text">Examples</span>
+        <base-dropdown class="nav-item" menu-classes="dropdown-menu-xl">
+          <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
+            <i class="ni ni-ui-04 d-lg-none"></i>
+            <span class="nav-link-inner--text">汽车管理</span>
           </a>
-          <router-link to="/landing" class="dropdown-item">Landing</router-link>
-          <router-link to="/profile" class="dropdown-item">Profile</router-link>
-          <router-link to="/login" class="dropdown-item">Login</router-link>
-          <router-link to="/register" class="dropdown-item">Register</router-link>
+          <div class="dropdown-menu-inner">
+            <a href="" class="media d-flex align-items-center" @click="handleDisplay">
+              <div class="icon icon-shape bg-gradient-success rounded-circle text-white">
+                <i class="ni ni-zoom-split-in"></i>
+              </div>
+              <div class="media-body ml-3">
+                <h6 class="heading text-success mb-md-1">用户汽车展示</h6>
+                <p class="description d-none d-md-inline-block mb-0">展示当前用户所拥有的汽车</p>
+              </div>
+            </a>
+
+            <a href="#" class="media d-flex align-items-center" @click="handleTransfer">
+              <div class="icon icon-shape bg-gradient-primary rounded-circle text-white">
+                <i class="ni ni-spaceship"></i>
+              </div>
+              <div class="media-body ml-3">
+                <h6 class="heading text-primary mb-md-1">转让汽车所有权</h6>
+                <p class="description d-none d-md-inline-block mb-0">汽车持有者可以进行所有权的转让</p>
+              </div>
+            </a>
+
+            <a href="" @click="handleAddApprove"
+               class="media d-flex align-items-center">
+              <div class="icon icon-shape bg-gradient-warning rounded-circle text-white">
+                <i class="ni ni-ui-04"></i>
+              </div>
+              <div class="media-body ml-3">
+                <h5 class="heading text-warning mb-md-1">认证维修点</h5>
+                <p class="description d-none d-md-inline-block mb-0">合约持有人可以进行维修点的授权</p>
+              </div>
+            </a>
+
+          </div>
         </base-dropdown>
       </ul>
       <ul class="navbar-nav align-items-lg-center ml-lg-auto">

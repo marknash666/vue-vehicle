@@ -82,6 +82,12 @@
                   });
                 }
               })
+          }else{
+            _this.$notify.error({
+              title: '查询',
+              message:  '您输入的VIN格式有误',
+              duration: 2500
+            });
           }
         })
       }
