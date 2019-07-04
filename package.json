@@ -9,10 +9,12 @@
     "start": "npm run dev",
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "e2e": "node test/e2e/runner.js",
-    "test": "npm run unit && npm run e2e",
+    "jest": "jest --env=node --colors --coverage test",
+    "test": "npm run jest",
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@vue/test-utils": "^1.0.0-beta.13",
     "axios": "^0.18.0",
     "element-ui": "^2.8.2",
     "js-cookie": "^2.2.0",
