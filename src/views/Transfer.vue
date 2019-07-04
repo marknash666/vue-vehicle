@@ -57,9 +57,31 @@
                   </el-form-item>
                 </el-form>
 
-                <base-button type="warning" round block size="lg" @click="submitForm('TransferInfo')">
+                <base-button type="warning" round block size="lg" @click="modals.modal2 = true">
                   提交转让
                 </base-button>
+                <modal :show.sync="modals.modal2"
+                       gradient="danger"
+                       modal-classes="modal-danger modal-dialog-centered">
+                  <h6 slot="header" class="modal-title" id="modal-title-notification">Your attention is required</h6>
+
+                  <div class="py-3 text-center">
+                    <i class="ni ni-bell-55 ni-3x"></i>
+                    <h4 class="heading mt-4">You should read this!</h4>
+                    <p>A small river named Duden flows by their place and supplies it with the
+                      necessary regelialia.</p>
+                  </div>
+
+                  <template slot="footer">
+                    <base-button type="white">Ok, Got it</base-button>
+                    <base-button type="link"
+                                 text-color="white"
+                                 class="ml-auto"
+                                 @click="submitForm('TransferInfo')">
+                      Close
+                    </base-button>
+                  </template>
+                </modal>
               </div>
             </div>
           </div>
@@ -74,9 +96,12 @@
 
 <script>
   import GLOBAL from '@/store/global_variable.js'
-
+  import Modal from "@/components/Modal.vue";
   export default {
     name: "home",
+    components:{
+      Modal
+    },
     data() {
       return {
         TransferInfo: {
@@ -94,6 +119,9 @@
             {type: 'string', message: '车价号必须为数字和字母的组合'},
             {min: 17, max: 17, message: '车架号长度为17位', trigger: 'blur'}
           ]
+        },
+        modals:{
+          modal2:false
         }
       };
     },

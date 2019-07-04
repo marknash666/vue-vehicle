@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="section section-shaped my-0 overflow-hidden">
-      <div class="shape shape-style-3 bg-gradient-default shape-skew">
+      <div class="shape shape-style-3 shape-primary shape-skew ">
         <span></span>
         <span></span>
         <span></span>

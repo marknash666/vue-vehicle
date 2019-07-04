@@ -88,21 +88,21 @@
           </a>
           <div class="dropdown-menu-inner">
             <a href="" class="media d-flex align-items-center" @click="handleDisplay">
-              <div class="icon icon-shape bg-gradient-success rounded-circle text-white">
+              <div class="icon icon-shape bg-gradient-info rounded-circle text-white">
                 <i class="ni ni-zoom-split-in"></i>
               </div>
               <div class="media-body ml-3">
-                <h6 class="heading text-success mb-md-1">用户汽车展示</h6>
+                <h6 class="heading text-info mb-md-1">用户汽车展示</h6>
                 <p class="description d-none d-md-inline-block mb-0">展示当前用户所拥有的汽车</p>
               </div>
             </a>
 
             <a href="#" class="media d-flex align-items-center" @click="handleTransfer">
-              <div class="icon icon-shape bg-gradient-primary rounded-circle text-white">
+              <div class="icon icon-shape bg-gradient-danger rounded-circle text-white">
                 <i class="ni ni-spaceship"></i>
               </div>
               <div class="media-body ml-3">
-                <h6 class="heading text-primary mb-md-1">转让汽车所有权</h6>
+                <h6 class="heading text-danger mb-md-1">转让汽车所有权</h6>
                 <p class="description d-none d-md-inline-block mb-0">汽车持有者可以进行所有权的转让</p>
               </div>
             </a>
@@ -111,11 +111,8 @@
         </base-dropdown>
       </ul>
       <ul class="navbar-nav align-items-lg-center ml-lg-auto">
-        <li class="nav-item">
-          <el-tooltip class="item" effect="light" content="Star us on Github" placement="top-start">
-            <h6 class="heading text-white mb-md-1">状态：{{userKey===undefined?"未登录":"已登录"}}</h6>
-
-          </el-tooltip>
+        <li class="nav-item" >
+          <h6 class="heading text-white mb-md-1">状态：{{userKey===undefined?"未登录":"已登录"}}</h6>
         <li class="nav-item d-none d-lg-block ml-lg-4">
           <a target="_blank" rel="noopener" class="btn btn-neutral btn-icon" @click="modals.modal2 = true">
                 <span class="btn-inner--icon">
@@ -153,6 +150,7 @@
   import AddVehicleInfo from "@/views/Modal/AddVehicleInfo";
   import LoginWidget from "@/views/Modal/LoginWidget";
   import GLOBAL from '@/store/global_variable.js'
+
   export default {
     components: {
       BaseNav,
@@ -200,7 +198,7 @@
           this.$router.push({path: '/VehicleInitial'})
         }
       },
-      handleDisplay(){
+      handleDisplay() {
         if (GLOBAL.getuserKey() == undefined) {
           alert("需要先进行登录以验证身份以查看当前所拥有的车辆")
         } else {
@@ -208,7 +206,7 @@
         }
 
       },
-      handleTransfer(){
+      handleTransfer() {
         if (GLOBAL.getuserKey() == undefined) {
           alert("需要先进行登录以验证身份以查看当前所拥有的车辆")
         } else {
