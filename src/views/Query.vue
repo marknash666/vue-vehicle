@@ -21,7 +21,7 @@
     name: 'login',
     data() {
       return {
-        vedioCanPlay: false,
+        vedioCanPlay: true,
         fixStyle: ''
       }
     },
