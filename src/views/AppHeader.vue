@@ -60,7 +60,7 @@
                body-classes="p-0"
                modal-classes="modal-dialog-centered modal-sm4">
           <card type="secondary" shadow
-                body-classes="px-lg-2   py-lg-8"
+                body-classes="px-lg-1   py-lg-8"
                 header-classes="bg-white pb-5"
                 class="border-0">
             <template>
