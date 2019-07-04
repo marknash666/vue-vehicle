@@ -23,7 +23,7 @@
         timer: ''
       }
     },
-    mounted: async function  () {
+    /*mounted: async function  () {
       let _this = this
       window.addEventListener('load', async function () {
         // Checking if Web3 has been injected by the browser (Mist/MetaMask)
@@ -41,7 +41,7 @@
       _this.web3js.eth.getCoinbase().then(console.log);
       let cur_account = accounts[0];
       console.log("zhanghu", cur_account)
-    }
+    }*/
   };
 </script>
 
