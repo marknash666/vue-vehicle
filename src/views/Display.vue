@@ -36,19 +36,13 @@
       <div class="container">
         <div class="vm-image-list">
           <el-row class="image-list" :gutter="20" >
-            <el-col :lg="8" :sm="20" class="vm-margin" v-for="(record,index) in Records" :key="record.TimeStamp" >
+            <el-col :lg="8" :sm="20" class="vm-margin" v-for="(car,index) in cars" :key="car.vin" >
                 <el-card class="border-0 newcard" hover shadow body-classes="py-5" >
-                  <icon name="ni ni-check-bold" type="primary" rounded class="mb-4">
+                  <icon name="ni ni-check-bold" type="success" rounded class="mb-4">
                   </icon>
-                  <h6 class="text-primary text-uppercase">{{"MaintenanceRecord " + index}}</h6>
-                  <p class="description mt-3 fixed-height" v-html="record.MaintenanceInfo"></p>
-                  <div>
-                    <badge type="warning" rounded>{{record.MaintenanceShopAddress}}</badge>
-                    <badge type="success" rounded>{{record.TimeStamp}}</badge>
-                  </div>
-                  <base-button tag="a" href="#" type="primary" class="mt-4">
-                   {{record.remark}}
-                  </base-button>
+                  <h6 class="text-success text-uppercase">{{"汽车简要信息 " + index}}</h6>
+                  <p class="description mt-3 fixed-height" v-html="car.info"></p>
+                  <p class="description mt-3 fixed-height" v-html="car.vin"></p>
                 </el-card>
             </el-col>
           </el-row>
@@ -67,10 +61,7 @@
     name: "home",
     data() {
       return {
-        ManufactureInfo: "",
-        Records: [
-
-        ]
+        cars: []
       }
     } ,
     components: {},
@@ -78,14 +69,12 @@
       var _this = this
       var input_vin = this.$route.query.VIN
       var params = {
-        address:GLOBAL.contract_address,
-        VIN:input_vin
+        address:GLOBAL.contract_address
       }
-      _this.axios.get('getVehicleTotalInfo/',{params})
+      _this.axios.get('getCarsByOwner/',{params})
         .then(function (response) {
-          console.log("print computed", response);
-          _this.ManufactureInfo = response.data.ManufactureInfo;
-          _this.Records=  response.data.Records;
+          _this.cars = response.data.cars;
+          console.log("print computed",  _this.cars);
         })
 
 
@@ -96,13 +85,10 @@
 </script>
 <style scoped>
   .newcard{
-    min-height:550px;
-    max-height:585px;
+    min-height:300px;
+    max-height:400px;
   }
-  .fixed-height{
-    min-height: 265px;
-    max-height: 300px;
-  }
+
 
   .vm-margin{
     margin-bottom: 30px;

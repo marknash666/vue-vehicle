@@ -41,11 +41,11 @@
                 <p>一旦提示操作成功则权限会被立刻转让给该地址</p>
                 <el-form :model="TransferInfo" :rules="rules" ref="TransferInfo" class="demo-ruleForm"
                          style="width: 100%;">
-                  <el-form-item prop="address">
+                  <el-form-item prop="toaddress">
                     <el-input class="login-form-input"
                               prefix-icon="fa fa-cloud-upload mr-2"
                               placeholder="接受者地址"
-                              v-model="TransferInfo.address">
+                              v-model="TransferInfo.toaddress">
                     </el-input>
                   </el-form-item>
                   <el-form-item prop="vin">
@@ -57,9 +57,8 @@
                   </el-form-item>
                 </el-form>
 
-
-                <base-button type="warning" round block size="lg" @click="handleAddApprove('ApprovedInfo')">
-                  Send Message
+                <base-button type="warning" round block size="lg" @click="submitForm('TransferInfo')">
+                  提交转让
                 </base-button>
               </div>
             </div>
@@ -81,11 +80,11 @@
     data() {
       return {
         TransferInfo: {
-          address: '',
+          toaddress: '',
           vin: ''
         },
         rules: {
-          address: [
+          toaddress: [
             {required: true, trigger: 'blur', message: '接受者地址不能为空'},
             {type: 'string', message: '接受者地址必须为数字和字母的组合'},
             {min: 42, max: 42, message: '地址长度为42个字节', trigger: 'blur'}
@@ -98,21 +97,60 @@
         }
       };
     },
-    components: {},
-    created() {
-      var _this = this
-      var input_vin = this.$route.query.VIN
-      var params = {
-        address: GLOBAL.contract_address,
-        VIN: input_vin
-      }
-      _this.axios.get('getVehicleTotalInfo/', {params})
-        .then(function (response) {
-          console.log("print computed", response);
-          _this.ManufactureInfo = response.data.ManufactureInfo;
-          _this.Records = response.data.Records;
-        })
+    methods: {
+      submitForm(formName) {
+        let _this=this
+        let data = {
+          address: GLOBAL.contract_address,
+          toaddress: _this.TransferInfo.toaddress,
+          vin:  _this.TransferInfo.vin
+        }
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            let status;
+            this.$notify({
+              title: '转让',
+              message:  '转让信息已提交',
+              duration: 1500
+            });
+            console.log("response", data);
+            _this.axios.post('transfer/',data)
+              .then(function (response) {
+                status = response.data.status;
+                if(status)
+                {
+                  _this.$message({
+                    message:  '汽车已转让 车架号为：'+_this.TransferInfo.vin+ '接受者为'+_this.TransferInfo.toaddress,
+                    type: 'success'
+                  });
+                }
+                else{
+                  _this.$message.error('汽车转让失败 车架号不存在或没有权限操作');
+                }
+              })
+              .catch(function (error)
+              {
+                console.log(error);
+              });
+            resetForm(formName)
+          } else {
+            this.$notify({
+              title: '提交',
+              message:  '转让信息有误',
+              duration: 1500
+            });
+            return false;
+          }
+        });
+      },
+      resetForm(formName) {
+        this.$nextTick(()=>{
+          this.$refs[formName].resetFields();
 
+        })
+      }
+    },
+    created:function(){
 
     }
   };

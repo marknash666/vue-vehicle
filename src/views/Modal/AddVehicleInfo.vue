@@ -107,7 +107,7 @@
                   });
                 }
                 else{
-                  _this.$message.error('汽车维修信息失败失败 车架号不存在或没有权限操作');
+                  _this.$message.error('汽车维修信息提交失败 车架号不存在或没有权限操作');
                 }
               })
               .catch(function (error)

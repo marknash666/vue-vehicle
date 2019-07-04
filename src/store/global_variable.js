@@ -1,4 +1,4 @@
-let contract_address = '0x2daa5ad33ec0ed94dfb91ae72ad40fa1e24e1fda'
+let contract_address = '0x015fad918ef7d8ddfab3954b8228555daa465557'
 
 let userKey =''
 
