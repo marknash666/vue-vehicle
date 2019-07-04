@@ -46,6 +46,4 @@ const vue = new Vue({
   }
 }).$mount("#app")
 
-window.addEventListener('load', function () {   // /date 表示日期选择路由
-    vue.$router.replace('/') // 列表页面的路由
-})
+

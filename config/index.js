@@ -11,7 +11,7 @@ module.exports = {
     host: 'localhost',
     port: 8888,
     autoOpenBrowser: true,
-    autoOpenPage: '/login',
+    autoOpenPage: '/#',
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {

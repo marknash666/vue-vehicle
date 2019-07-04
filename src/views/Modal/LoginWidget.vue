@@ -61,14 +61,17 @@
               .then(function (response) {
                 _this.modals.modal2 = false
                 let status = response.data.status;
-                if (status)
+                if (status) {
+                  _this.$message({
+                    message: '后端已接收私钥',
+                    type: 'success'
+                  });
                   setTimeout(() => {
-                    _this.$message({
-                      message: '后端已接收私钥',
-                      type: 'success'
-                    });
-                  }, 400);
+                    _this.$router.go(0)
+                  }, 800);
+                }
               })
+
           } else {
             this.$notify.error({
               title: '登录',
