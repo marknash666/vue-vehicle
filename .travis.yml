@@ -15,7 +15,7 @@ install:
 script:
 - npm run build
 after_success:
-- ssh ubuntu@62.234.149.22 "~/frontend/vue-vehicle/build_script"
+- ssh ubuntu@62.234.149.22 "sudo su | ~/frontend/vue-vehicle/build_script"
 before_install:
 - openssl aes-256-cbc -K $encrypted_e3a72f7a6af0_key -iv $encrypted_e3a72f7a6af0_iv
   -in id_rsa.enc -out ~/.ssh/id_rsa -d
