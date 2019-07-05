@@ -57,27 +57,26 @@
                   </el-form-item>
                 </el-form>
 
-                <base-button type="warning" round block size="lg" @click="modals.modal2 = true">
+                <base-button type="warning" round block size="lg" @click="handleSubmit('TransferInfo')">
                   提交转让
                 </base-button>
                 <modal :show.sync="modals.modal2"
                        gradient="danger"
                        modal-classes="modal-danger modal-dialog-centered">
-                  <h6 slot="header" class="modal-title" id="modal-title-notification">Your attention is required</h6>
+                  <h6 slot="header" class="modal-title" id="modal-title-notification">请注意</h6>
 
                   <div class="py-3 text-center">
                     <i class="ni ni-bell-55 ni-3x"></i>
-                    <h4 class="heading mt-4">You should read this!</h4>
-                    <p>A small river named Duden flows by their place and supplies it with the
-                      necessary regelialia.</p>
+                    <h4 class="heading mt-4">转让须知！</h4>
+                    <p>你正在进行汽车所有权转让，一旦提示操作成功则权限会被立刻转让给该地址</p>
                   </div>
 
                   <template slot="footer">
-                    <base-button type="white" @click="submitForm('TransferInfo')">Ok, Got it</base-button>
+                    <base-button type="white" @click="submitForm('TransferInfo')">知悉</base-button>
                     <base-button type="link"
                                  text-color="white"
-                                 class="ml-auto">
-                      Close
+                                 class="ml-auto" @click="modals.modal2=false">
+                      取消
                     </base-button>
                   </template>
                 </modal>
@@ -133,31 +132,48 @@
           toaddress: _this.TransferInfo.toaddress,
           vin: _this.TransferInfo.vin
         }
+        let status;
+        this.$notify({
+          title: '转让',
+          message: '转让信息已提交',
+          duration: 1500
+        });
+        console.log("response", data);
+        _this.axios.post('transfer/', data)
+          .then(function (response) {
+            status = response.data.status;
+            if (status) {
+              _this.$message({
+                message: '汽车已成功转让',
+                type: 'success'
+              });
+              setTimeout(() => {
+                _this.$router.go(0)
+              }, 500);
+            } else {
+              _this.$message.error('汽车转让失败 车架号不存在或没有权限操作');
+              _this.modals.modal2 = false
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
+        _this.resetForm(formName)
+
+
+      },
+      resetForm(formName) {
+        this.$nextTick(() => {
+          this.$refs[formName].resetFields();
+
+        })
+      },
+      handleSubmit(formName) {
+        let _this = this
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            let status;
-            this.$notify({
-              title: '转让',
-              message: '转让信息已提交',
-              duration: 1500
-            });
-            console.log("response", data);
-            _this.axios.post('transfer/', data)
-              .then(function (response) {
-                status = response.data.status;
-                if (status) {
-                  _this.$message({
-                    message: '汽车已转让 车架号为：' + _this.TransferInfo.vin + '接受者为' + _this.TransferInfo.toaddress,
-                    type: 'success'
-                  });
-                } else {
-                  _this.$message.error('汽车转让失败 车架号不存在或没有权限操作');
-                }
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
-            _this.resetForm(formName)
+            _this.modals.modal2 = true
           } else {
             this.$notify({
               title: '提交',
@@ -167,18 +183,14 @@
             return false;
           }
         });
+
       },
-      resetForm(formName) {
-        this.$nextTick(() => {
-          this.$refs[formName].resetFields();
 
-        })
+      created: function () {
+
       }
-    },
-    created: function () {
-
     }
-  };
+  }
 </script>
 <style scoped>
   .newcard {

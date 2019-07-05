@@ -44,19 +44,18 @@
     data() {
       return {
         VehicleInfo: {
-          vin: '12345645645456545',
+          vin: 'LS5A3ABD7AB158999',
           date1: '',
           remark: 'Maintenance',
-          desc: '常规保养 56157km 2016-7-12<br/>\n' +
-            '项目：5000公里常规保养，刹车油更换，燃油滤清器更换，空气滤芯<br/>\n' +
+          desc: '常规保养18990km \n' +
+            '项目：5000公里常规保养（更换三滤，机油） <br/>\n' +
             '材料：<br/>\n' +
-            '机油滤清器：1 <br/>\n' +
-            '放油螺栓：1 <br/>\n' +
-            '制动液：1 <br/>\n' +
-            '空滤器滤芯2.0:1 <br/>\n' +
-            '燃油滤清器：1 <br/>\n' +
-            '优选机油：1 <br/>\n' +
-            'PM2.5 活性炭空调滤芯： 1'
+            '机油滤清器M2.0:1 <br/>\n' +
+            '发动机机油-灰桶：1<br/>\n' +
+            '发动机外部清洗辅料：1 <br/>\n' +
+            '空滤器滤芯：1 <br/>\n' +
+            '燃油滤清器MR1.6 2.0:1 <br/>\n' +
+            '空调芯-活性炭：1'
         },
         rules: {
           vin: [
@@ -83,7 +82,7 @@
           address: GLOBAL.contract_address,
           vin:  _this.VehicleInfo.vin,
           remarks: _this.VehicleInfo.remark,
-          info:_this.VehicleInfo.desc
+          info:_this.VehicleInfo.desc+_this.VehicleInfo.date1
         }
         this.$refs[formName].validate((valid) => {
           if (valid) {
@@ -105,6 +104,9 @@
                     message:  '汽车维修信息成功上传  车架号为：'+_this.VehicleInfo.vin,
                     type: 'success'
                   });
+                  setTimeout(() => {
+                    _this.$router.go(0)
+                  }, 500);
                 }
                 else{
                   _this.$message.error('汽车维修信息提交失败 车架号不存在或没有权限操作');

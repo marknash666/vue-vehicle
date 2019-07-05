@@ -69,18 +69,9 @@
     data() {
       return {
         VehicleInfo: {
-          vin: '12345645645456545',
+          vin: 'JY62R5T67UYI903D8',
           date1: '',
-          desc: '常规保养 56157km 2016-7-12<br/>\n' +
-            '项目：5000公里常规保养，刹车油更换，燃油滤清器更换，空气滤芯<br/>\n' +
-            '材料：<br/>\n' +
-            '机油滤清器：1 <br/>\n' +
-            '放油螺栓：1 <br/>\n' +
-            '制动液：1 <br/>\n' +
-            '空滤器滤芯2.0:1 <br/>\n' +
-            '燃油滤清器：1 <br/>\n' +
-            '优选机油：1 <br/>\n' +
-            'PM2.5 活性炭空调滤芯： 1'
+          desc: '保时捷<br/>车辆铭牌是标明车辆基本特征的标牌。其主要内容包括车辆型号、发动机型号、发动机排量、发动机额定功率、车辆识别代号、总质量、载重量或载客人数、出厂编号、制造年月、制造国及厂名等。车辆铭牌一般位于车辆前部易于观察到的地方，如B柱下方<br/>'
         },
         rules: {
           vin: [
@@ -103,7 +94,7 @@
         let data = {
           address: GLOBAL.contract_address,
           vin: _this.VehicleInfo.vin,
-          originInfo: _this.VehicleInfo.desc
+          originInfo: _this.VehicleInfo.desc+_this.VehicleInfo.date1
         }
         this.$refs[formName].validate((valid) => {
           if (valid) {

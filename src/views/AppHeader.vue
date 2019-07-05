@@ -23,7 +23,7 @@
             <span class="nav-link-inner--text">权限级操作</span>
           </a>
           <div class="dropdown-menu-inner">
-            <a href="" class="media d-flex align-items-center" @click="handleInitial">
+            <a href="#" class="media d-flex align-items-center" @click="handleInitial">
               <div class="icon icon-shape bg-gradient-success rounded-circle text-white">
                 <i class="ni ni-zoom-split-in"></i>
               </div>
@@ -43,7 +43,7 @@
               </div>
             </a>
 
-            <a href="" @click="handleAddApprove"
+            <a href="#" @click="handleAddApprove"
                class="media d-flex align-items-center">
               <div class="icon icon-shape bg-gradient-warning rounded-circle text-white">
                 <i class="ni ni-ui-04"></i>
@@ -87,7 +87,7 @@
             <span class="nav-link-inner--text">汽车管理</span>
           </a>
           <div class="dropdown-menu-inner">
-            <a href="" class="media d-flex align-items-center" @click="handleDisplay">
+            <a href="#" class="media d-flex align-items-center" @click="handleDisplay">
               <div class="icon icon-shape bg-gradient-info rounded-circle text-white">
                 <i class="ni ni-zoom-split-in"></i>
               </div>
