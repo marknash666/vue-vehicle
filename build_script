@@ -1,4 +1,5 @@
 #!/bin/bash
 cd ~/frontend/vue-vehicle
 git pull origin master
+npm run build
 echo 'travis build done!'
